@@ -7,6 +7,11 @@ export default function Home() {
     console.log(data);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(data);
+  };
+
   return (
     <section>
       <h1>Welcome back</h1>
@@ -24,7 +29,9 @@ export default function Home() {
           onChange={handleChanges}
           type="password" id="password" name="password" value={data.password} />
         </div>
-        <button type="submit">Sign In</button>
+        <button 
+        onSubmit={handleSubmit}
+        type="submit">Sign In</button>
       </form>
     </section>
   )
