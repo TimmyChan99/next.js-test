@@ -4,6 +4,7 @@ export const images = () => {
 	const [images, setImages] = useState([])
 	const [pageNumber, setPageNumber] = useState(1)
 	const [totalPages, setTotalPages] = useState(0)
+	const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
 		const fetchImages = async () => {
@@ -19,7 +20,9 @@ export const images = () => {
 		const total = data.headers.get("x-total")
 		setTotalPages(total)
 		setImages(images)
+		setLoading(false)
 		}
+
 		fetchImages()
 
 		return () => {
@@ -40,9 +43,9 @@ export const images = () => {
 			{ totalPages > 0 && <p>Page {pageNumber} of {totalPages}</p>}
 			{(pageNumber > 1 ) && (<button onClick={prevPage}>Prev Page</button>)}
 			{(pageNumber <= totalPages) && (<button onClick={nextPage}>Next Page</button>)}
-       {images.map(image => (
+       {!loading ? (images.map(image => (
 								 <img src={image.urls.regular} alt={image.alt_description} />
-														))}
+														))): (<p>Loading...</p>)}
 		</div>
 	)
 }
