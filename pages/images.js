@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { db, uc } from "../database"
 
 export const images = () => {
 	const [images, setImages] = useState([])
@@ -6,6 +7,11 @@ export const images = () => {
 	const [totalPages, setTotalPages] = useState(0)
 	const [loading, setLoading] = useState(false)
 
+ uc().then((user) => {
+		console.log(user)
+	})
+
+	
 	useEffect(() => {
 		const fetchImages = async () => {
 			const resp = fetch(`https://api.unsplash.com/photos?page=${pageNumber}`, {
