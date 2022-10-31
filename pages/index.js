@@ -2,6 +2,8 @@ import { useState } from "react";
 
 export default function Home() {
   const [data, setData] = useState({ username: '', password: '' });
+  const [message, setMessage] = useState('');
+
   const handleChanges = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -16,14 +18,15 @@ export default function Home() {
       body: JSON.stringify(data),
     });
     const json = await res.json();
-    // if (!res.ok) throw Error(json.message);
-    console.log(json);
+    if (json.status === 'success') localStorage.setItem('user', JSON.stringify({ user: data.username, status: true}));
+    if (!res.ok) setMessage(json.message);
   };
 
   return (
     <section>
       <h1>Welcome back</h1>
       <p>Welcome back Please enter your details</p>
+      {message && <p>{message}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">username</label>

@@ -2,7 +2,7 @@
 
 export default function handler(req, res) {
   const { username, password } = req.body;
-  
+
   if (username === process.env.USER1 && password === process.env.PASSWORD1) {
     res.status(200).json({ status: 'success' });
   }
@@ -12,9 +12,9 @@ export default function handler(req, res) {
   }
 
   if (username === process.env.USER3 && password === process.env.PASSWORD3) {
-    res.status(200).json({ status: 'failed', message: 'Ce compte a été bloqué' });
+    res.status(401).json({ status: 'failed', message: 'Ce compte a été bloqué' });
   } else {
-    res.status(401).json({ status: 'failed', message: 'Identifiants incorrects' });
+    res.status(401).json({ status: 'failed', message: 'Informations de connexion invalides' });
   }
 
 }
