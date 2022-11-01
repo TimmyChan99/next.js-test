@@ -18,10 +18,10 @@ const user2 = { username: 'muser2', liked: [] }
 
 // db.open()
 
-db.get('muser1', (err, value) => {
-	if (err) return console.log('Ooops!', err)
-	console.log('user1', value)
-})
+// db.get('muser1', (err, value) => {
+// 	if (err) return console.log('Ooops!', err)
+// 	console.log('user1', value)
+// })
 
 // get current user and update the liked images array
 const getUserAndUodateLikes = async (currentUser, imgId) => {
