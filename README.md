@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Task Assignment
+
+This project is a task assignment where I used Next.js with level DB to build a simple app consisting of an authentication page and an images page that shows a list of images coming from a third-party API. Users can sign in, logout, and like, unlike the images.
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/92228303/199287661-5923289f-8b66-40c1-89ef-6f2c6bb23168.png" alt="app demo" />
+</p>
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/92228303/199287959-44cfcbc3-1187-4318-b05f-4190867fe420.png" alt="app demo" />
+</p>
+
+## Built With
+
+- JavaScript
+- Next.js
+- level DB
+- Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+### **Setup**
+To get a local copy up and running follow these simple example steps.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- Run `git clone https://github.com/TimmyChan99/next.js-test.git`
+- Go to the folder `cd next.js-test`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Run `npm install` : To install packages
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Run `npm run dev` : You should now have the project running locally on a dev server.
+ (Open http://localhost:3000 to view it in your browser.)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Demo
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+[Live version](https://timmychan99.github.io/insights/)
 
-## Learn More
+## Authors
 
-To learn more about Next.js, take a look at the following resources:
+👤 **Fatima Ezzahra**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- GitHub: [@TimmyChan99](https://github.com/TimmyChan99)
+- Twitter: [@elemenoun](https://twitter.com/elemenoun)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/fatima-ezzahra-elemenoun-020841225/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 🤝 Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions, issues, and feature requests are welcome!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- API from [Unsplash](https://unsplash.com/developers)
+
+
+## 📝 License
+
+This project is [MIT](./MIT.md) licensed.
