@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import Image from "../components/Image";
 
 export const images = () => {
 	const [images, setImages] = useState([])
@@ -6,6 +7,7 @@ export const images = () => {
 	const [totalPages, setTotalPages] = useState(0)
 	const [loading, setLoading] = useState(false)
 
+	
 	useEffect(() => {
 		const fetchImages = async () => {
 			const resp = fetch(`https://api.unsplash.com/photos?page=${pageNumber}`, {
@@ -25,9 +27,6 @@ export const images = () => {
 
 		fetchImages()
 
-		return () => {
-			// cleanup
-		}
 	}, [pageNumber])
 
 	const nextPage = () => {
@@ -45,7 +44,7 @@ export const images = () => {
 			{(pageNumber > 1) && (<button onClick={prevPage}>Prev Page</button>)}
 			{(pageNumber <= totalPages) && (<button onClick={nextPage}>Next Page</button>)}
 			{!loading ? (images.map(image => (
-				<img src={image.urls.regular} alt={image.alt_description} />
+				<Image image={image} />
 			))) : (<p>Loading...</p>)}
 		</div>
 	)
