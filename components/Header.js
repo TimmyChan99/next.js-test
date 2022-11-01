@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const Header = ({ totalPages, pageNumber, prevPage, nextPage }) => {
 	const [user, setUser] = useState(null);
+  const router = useRouter();
 
 	useEffect(() => {
 	const { user } = JSON.parse(localStorage.getItem('user')) || {}
 		setUser(user);
 	}, [])
+
+const logout = () => {
+	localStorage.removeItem('user')
+	router.push('/')
+}
 
 	return (
 		<header className="text-zinc-900 flex flex-col md:flex-row items-center justify-between px-5 py-3 space-y-4">
@@ -32,7 +39,7 @@ const Header = ({ totalPages, pageNumber, prevPage, nextPage }) => {
 			</div>
 			{ user && <button
 				className="text-white bg-zinc-900 px-5 py-2 rounded-md font-medium "
-				onClick={() => localStorage.removeItem('user')}>
+				onClick={logout}>
 				Logout
 			</button>
 			}
