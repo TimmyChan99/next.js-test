@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Suspense } from "react";
 import Header from "../components/Header";
 import fetchImages from "../utils/fetchImages";
+import ProtetedRoute from "../components/ProtetedRoute";
 
 const ImageLazyLoad = React.lazy(() => import('../components/Image'));
 
@@ -40,14 +41,16 @@ export const images = () => {
 	})
 
 	return (
+		<ProtetedRoute>
 		<div>
-			<Header totalPages={totalPages} pageNumber={pageNumber} prevPage={prevPage} nextPage={nextPage} />
-			{!loading ? (
-				<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-5 py-5">
-					{imagesList}
-				</ul>
-			) : (<p>Loading...</p>)}
+				<Header totalPages={totalPages} pageNumber={pageNumber} prevPage={prevPage} nextPage={nextPage} />
+				{!loading ? (
+					<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-5 py-5">
+						{imagesList}
+					</ul>
+				) : (<p>Loading...</p>)}
 		</div>
+			</ProtetedRoute>
 	)
 }
 

@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Header = ({ totalPages, pageNumber, prevPage, nextPage }) => {
+	const [user, setUser] = useState(null);
+
+	useEffect(() => {
 	const { user } = JSON.parse(localStorage.getItem('user')) || {}
+		setUser(user);
+	}, [])
 
 	return (
 		<header className="text-zinc-900 flex flex-col md:flex-row items-center justify-between px-5 py-3 space-y-4">
