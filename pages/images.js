@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import Header from "../components/Header";
-import Image from "../components/Image";
 import fetchImages from "../utils/fetchImages";
+
+const ImageLazyLoad = React.lazy(() => import('../components/Image'));
 
 export const images = () => {
 	const [images, setImages] = useState([])
@@ -9,14 +10,14 @@ export const images = () => {
 	const [totalPages, setTotalPages] = useState(0)
 	const [loading, setLoading] = useState(false)
 
-	
+
 	useEffect(() => {
 		const fetchAPI = async () => {
-		const { images, total } = await fetchImages(pageNumber)
-		
-		setTotalPages(total)
-		setImages(images)
-		setLoading(false)
+			const { images, total } = await fetchImages(pageNumber)
+
+			setTotalPages(total)
+			setImages(images)
+			setLoading(false)
 		}
 
 		fetchAPI()
@@ -31,7 +32,11 @@ export const images = () => {
 	}
 
 	const imagesList = images.map((image) => {
-		return <Image key={image.id} image={image} />
+		return (
+			<Suspense fallback={<div>Loading...</div>}>
+				<ImageLazyLoad key={image.id} image={image} />
+			</Suspense>
+		)
 	})
 
 	return (

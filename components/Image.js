@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { getUserAndUodateLikes, getLiked, getUserAndRemoveLike } from "../database";
 
+
 const Image = ({ image }) => {
 
 	const [liked, setLiked] = useState(false);
