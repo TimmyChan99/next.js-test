@@ -35,7 +35,7 @@ export default function Home() {
        <h1 className="font-medium text-3xl tracking-wide">Welcome back</h1>
        <p className="text-gray-500 font-medium">Welcome back Please enter your details</p>
      </div>
-      {message && <p>{message}</p>}
+      {message && <p className="text-rose-600 text-lg font-medium">{message}</p>}
       <form 
       className="flex flex-col w-4/5 mx-auto space-y-4"
       onSubmit={handleSubmit}>
