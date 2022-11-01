@@ -30,12 +30,18 @@ export const images = () => {
 		setPageNumber((prev) => prev - 1)
 	}
 
+	const imagesList = images.map((image) => {
+		return <Image key={image.id} image={image} />
+	})
+
 	return (
 		<div>
 			<Header totalPages={totalPages} pageNumber={pageNumber} prevPage={prevPage} nextPage={nextPage} />
-			{!loading ? (images.map(image => (
-				<Image image={image} />
-			))) : (<p>Loading...</p>)}
+			{!loading ? (
+				<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-5 py-5">
+					{imagesList}
+				</ul>
+			) : (<p>Loading...</p>)}
 		</div>
 	)
 }
