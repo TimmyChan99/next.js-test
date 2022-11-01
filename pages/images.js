@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import Header from "../components/Header";
 import Image from "../components/Image";
+import fetchImages from "../utils/fetchImages";
 
 export const images = () => {
 	const [images, setImages] = useState([])
@@ -9,23 +11,15 @@ export const images = () => {
 
 	
 	useEffect(() => {
-		const fetchImages = async () => {
-			const resp = fetch(`https://api.unsplash.com/photos?page=${pageNumber}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Client-ID ${process.env.NEXT_PUBLIC_ACCESS_KEY}`,
-				},
-			})
-			const data = await resp
-			const images = await data.json()
-			const total = data.headers.get("x-total")
-			setTotalPages(total)
-			setImages(images)
-			setLoading(false)
+		const fetchAPI = async () => {
+		const { images, total } = await fetchImages(pageNumber)
+		
+		setTotalPages(total)
+		setImages(images)
+		setLoading(false)
 		}
 
-		fetchImages()
+		fetchAPI()
 
 	}, [pageNumber])
 
@@ -38,11 +32,7 @@ export const images = () => {
 
 	return (
 		<div>
-			<h1>Images</h1>
-			<input type="number" placeholder="Search by pages" />
-			{totalPages > 0 && <p>Page {pageNumber} of {totalPages}</p>}
-			{(pageNumber > 1) && (<button onClick={prevPage}>Prev Page</button>)}
-			{(pageNumber <= totalPages) && (<button onClick={nextPage}>Next Page</button>)}
+			<Header totalPages={totalPages} pageNumber={pageNumber} prevPage={prevPage} nextPage={nextPage} />
 			{!loading ? (images.map(image => (
 				<Image image={image} />
 			))) : (<p>Loading...</p>)}
