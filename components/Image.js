@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { getUserAndUodateLikes, getLiked, getUserAndRemoveLike } from "../database";
 
+
 const Image = ({ image }) => {
 
 	const [liked, setLiked] = useState(false);
@@ -31,17 +32,22 @@ const Image = ({ image }) => {
 	};
 
 	return (
-		<div>
-			<img src={image.urls.regular} alt={image.alt_description} />
+		<li className="flex flex-col space-y-5">
+			<img
+			className="w-full h-96 object-cover rounded-md"
+			src={image.urls.full} 
+			alt={image.alt_description} />
 
-			{liked ? (<button type='button' onClick={handleUnlike}>
-				<BsHeartFill fill='red' />
-			</button>
-			) : (<button type='button' onClick={handleLike}>
-				<BsHeart fill='red' />
-			</button>
-			)}
-		</div>
+			<div className="ml-5">
+				{liked ? (<button type='button' onClick={handleUnlike}>
+					<BsHeartFill fill='red' size={30} />
+				</button>
+				) : (<button type='button' onClick={handleLike}>
+					<BsHeart fill='red' size={30} />
+				</button>
+				)}
+			</div>
+		</li>
 	)
 }
 

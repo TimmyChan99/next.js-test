@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
-import Image from "../components/Image";
+import React, { useEffect, useState, Suspense } from "react";
+import Header from "../components/Header";
+import fetchImages from "../utils/fetchImages";
+import ProtetedRoute from "../components/ProtetedRoute";
+
+const ImageLazyLoad = React.lazy(() => import('../components/Image'));
 
 export const images = () => {
 	const [images, setImages] = useState([])
@@ -7,25 +11,17 @@ export const images = () => {
 	const [totalPages, setTotalPages] = useState(0)
 	const [loading, setLoading] = useState(false)
 
-	
+
 	useEffect(() => {
-		const fetchImages = async () => {
-			const resp = fetch(`https://api.unsplash.com/photos?page=${pageNumber}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Client-ID ${process.env.NEXT_PUBLIC_ACCESS_KEY}`,
-				},
-			})
-			const data = await resp
-			const images = await data.json()
-			const total = data.headers.get("x-total")
+		const fetchAPI = async () => {
+			const { images, total } = await fetchImages(pageNumber)
+
 			setTotalPages(total)
 			setImages(images)
 			setLoading(false)
 		}
 
-		fetchImages()
+		fetchAPI()
 
 	}, [pageNumber])
 
@@ -36,17 +32,25 @@ export const images = () => {
 		setPageNumber((prev) => prev - 1)
 	}
 
+	const imagesList = images.map((image) => {
+		return (
+			<Suspense fallback={<div>Loading...</div>}>
+				<ImageLazyLoad key={image.id} image={image} />
+			</Suspense>
+		)
+	})
+
 	return (
+		<ProtetedRoute>
 		<div>
-			<h1>Images</h1>
-			<input type="number" placeholder="Search by pages" />
-			{totalPages > 0 && <p>Page {pageNumber} of {totalPages}</p>}
-			{(pageNumber > 1) && (<button onClick={prevPage}>Prev Page</button>)}
-			{(pageNumber <= totalPages) && (<button onClick={nextPage}>Next Page</button>)}
-			{!loading ? (images.map(image => (
-				<Image image={image} />
-			))) : (<p>Loading...</p>)}
+				<Header totalPages={totalPages} pageNumber={pageNumber} prevPage={prevPage} nextPage={nextPage} />
+				{!loading ? (
+					<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-5 py-5">
+						{imagesList}
+					</ul>
+				) : (<p>Loading...</p>)}
 		</div>
+			</ProtetedRoute>
 	)
 }
 
