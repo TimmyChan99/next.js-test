@@ -25,6 +25,12 @@ const Header = ({ totalPages, pageNumber, prevPage, nextPage }) => {
 					Next
 				</button>)}
 			</div>
+			{ user && <button
+				className="text-white bg-zinc-900 px-5 py-2 rounded-md font-medium "
+				onClick={() => localStorage.removeItem('user')}>
+				Logout
+			</button>
+			}
 		</header>
 	)
 }
