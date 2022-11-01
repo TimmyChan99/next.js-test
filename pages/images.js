@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react"
-import { db, uc } from "../database"
+import { useEffect, useState } from "react";
+import Image from "../components/Image";
 
 export const images = () => {
 	const [images, setImages] = useState([])
 	const [pageNumber, setPageNumber] = useState(1)
 	const [totalPages, setTotalPages] = useState(0)
 	const [loading, setLoading] = useState(false)
-
- uc().then((user) => {
-		console.log(user)
-	})
 
 	
 	useEffect(() => {
@@ -31,9 +27,6 @@ export const images = () => {
 
 		fetchImages()
 
-		return () => {
-			// cleanup
-		}
 	}, [pageNumber])
 
 	const nextPage = () => {
@@ -51,7 +44,7 @@ export const images = () => {
 			{(pageNumber > 1) && (<button onClick={prevPage}>Prev Page</button>)}
 			{(pageNumber <= totalPages) && (<button onClick={nextPage}>Next Page</button>)}
 			{!loading ? (images.map(image => (
-				<img src={image.urls.regular} alt={image.alt_description} />
+				<Image image={image} />
 			))) : (<p>Loading...</p>)}
 		</div>
 	)
