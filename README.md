@@ -32,7 +32,7 @@ To get a local copy up and running follow these simple example steps.
 
 ## Demo
 
-[Live version](https://timmychan99.github.io/insights/)
+[Live version not available]()
 
 ## Authors
 
