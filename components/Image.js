@@ -13,7 +13,7 @@ const Image = ({ image }) => {
 			setLiked(liked);
 		};
 		isLiked();
-	}, []);
+	}, [currentUser, image.id]);
 
 
 	// store the id of the image in the database
